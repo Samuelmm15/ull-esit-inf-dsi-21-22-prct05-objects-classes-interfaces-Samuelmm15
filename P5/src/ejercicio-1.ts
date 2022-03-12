@@ -100,25 +100,25 @@ class combat implements pokedex {
   }
 }
 
-const blastoisePokemon =
+export const blastoisePokemon =
   // eslint-disable-next-line new-cap
   new combat(`Blastoise`, 85.5, 1.6, `agua`, 83, 100, 78, 79);
 
-const charizarPokemon =
+export const charizarPokemon =
   // eslint-disable-next-line new-cap
   new combat(`Charizard`, 90.5, 1.7, `fuego`, 84, 78, 100, 78);
 
-const raichuPokemon =
+export const raichuPokemon =
   // eslint-disable-next-line new-cap
   new combat(`Raichu`, 30.0, 0.8, `eléctrico`, 90, 55, 110, 60);
 
-const servinePokemon =
+export const servinePokemon =
   // eslint-disable-next-line new-cap
   new combat(`Servine`, 16, 0.8, `hierba`, 60, 75, 83, 60);
 
 
-blastoisePokemon.start(servinePokemon, charizarPokemon); // PREGUNTAR CÓMO SE PUEDE HACER LA LLAMADA AL MÉTODO SIN HACER NINGUN TIPO DE USO DEL OBJETO PARA LLAMARLO
-raichuPokemon.start(blastoisePokemon, raichuPokemon);
+// blastoisePokemon.start(blastoisePokemon, charizarPokemon); // PREGUNTAR CÓMO SE PUEDE HACER LA LLAMADA AL MÉTODO SIN HACER NINGUN TIPO DE USO DEL OBJETO PARA LLAMARLO
+raichuPokemon.start(servinePokemon, charizarPokemon);
 
 // To use for the program, here is the database of the pokemon
 // https://pokemondb.net/pokedex/all
