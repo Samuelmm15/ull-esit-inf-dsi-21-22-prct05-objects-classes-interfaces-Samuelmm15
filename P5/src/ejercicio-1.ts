@@ -117,7 +117,7 @@ export const servinePokemon =
   new combat(`Servine`, 16, 0.8, `hierba`, 60, 75, 83, 60);
 
 
-// blastoisePokemon.start(blastoisePokemon, charizarPokemon); // PREGUNTAR CÓMO SE PUEDE HACER LA LLAMADA AL MÉTODO SIN HACER NINGUN TIPO DE USO DEL OBJETO PARA LLAMARLO
+// blastoisePokemon.start(blastoisePokemon, raichuPokemon); // PREGUNTAR CÓMO SE PUEDE HACER LA LLAMADA AL MÉTODO SIN HACER NINGUN TIPO DE USO DEL OBJETO PARA LLAMARLO
 raichuPokemon.start(servinePokemon, charizarPokemon);
 
 // To use for the program, here is the database of the pokemon
