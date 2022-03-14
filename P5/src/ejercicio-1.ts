@@ -116,9 +116,11 @@ export const servinePokemon =
   // eslint-disable-next-line new-cap
   new combat(`Servine`, 16, 0.8, `hierba`, 60, 75, 83, 60);
 
+export const battleField =
+  // eslint-disable-next-line new-cap
+  new combat(``, 0, 0, ``, 0, 0, 0, 0);
 
-// blastoisePokemon.start(blastoisePokemon, raichuPokemon); // PREGUNTAR CÓMO SE PUEDE HACER LA LLAMADA AL MÉTODO SIN HACER NINGUN TIPO DE USO DEL OBJETO PARA LLAMARLO
-raichuPokemon.start(servinePokemon, charizarPokemon);
+battleField.start(servinePokemon, charizarPokemon);
 
 // To use for the program, here is the database of the pokemon
 // https://pokemondb.net/pokedex/all
