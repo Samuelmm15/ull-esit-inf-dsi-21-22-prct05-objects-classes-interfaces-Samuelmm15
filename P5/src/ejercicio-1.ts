@@ -1,4 +1,8 @@
 /* eslint-disable max-len */
+/**
+ * This is the interface neccesary to define the structure
+ * of the differents Pokemon
+ */
 interface pokedex {
   pokemonName: string;
   weight: number;
@@ -10,12 +14,21 @@ interface pokedex {
   healthPoints: number;
 }
 
+/**
+ * This class is neccesary to make a combat with two Pokemons.
+ */
 class combat implements pokedex {
   constructor(public readonly pokemonName: string, public readonly weight: number,
         public readonly height: number, public readonly pokemonType: string,
         public attack: number, public defense: number, public readonly speed: number,
         public healthPoints: number) {
   }
+  /**
+   * This function calculates the damage of an attack.
+   * @param firstoponent Consists in the first oponent of the fight.
+   * @param secondoponent Consists in the second oponent of the fight.
+   * @returns The total damage of an attack.
+   */
   damageProduction(firstoponent: combat, secondoponent: combat): number {
     let damage: number = 0;
     let efficiency: number = 0;
@@ -49,6 +62,12 @@ class combat implements pokedex {
     damage = 50 * (firstoponent.attack / firstoponent.defense) * efficiency;
     return damage;
   }
+  /**
+   * This function consists in the fight of two Pokemons.
+   * @param firstoponent Consists in the first Pokemon to fight.
+   * @param secondoponent Consists in the second Pokemon to fight.
+   * @returns The winner of the fight.
+   */
   start(firstoponent: combat, secondoponent: combat): string {
     let counter: number = 1;
     let combatFinish: number = -1;
