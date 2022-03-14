@@ -1,5 +1,5 @@
 class board {
-  constructor(public boardMatrix: string[][]) {
+  constructor(private boardMatrix: string[][]) {
     // eslint-disable-next-line max-len
     // this.boardMatrix = [['0', '0', '0', '0', '0', '0', '0'], ['0', '0', '0', '0', '0', '0', '0'], ['0', '0', '0', '0', '0', '0', '0'], ['0', '0', '0', '0', '0', '0', '0'], ['0', '0', '0', '0', '0', '0', '0'], ['0', '0', '0', '0', '0', '0', '0']];
     const auxiliaryArray: string[] = [];
@@ -7,42 +7,69 @@ class board {
     const columns: number = 7;
     let i: number = 0;
     let j: number = 0;
-    while (j !== columns) { // the columns
-      auxiliaryArray.push(`0`);
-      j++;
-    }
-    while (i !== rows) { // the rows
+    for (i = 0; i < rows; i++) {
+      for (j = 0; j < columns; j++) {
+        auxiliaryArray.push(`0`);
+      }
       this.boardMatrix.push(auxiliaryArray);
-      i++;
     }
+    // console.log(this.boardMatrix); // To Comprobe
   }
+  // To get the value of the introduced position
   getValue(i: number, j: number) {
     return this.boardMatrix[i][j];
   }
-  setValue(j: number, value: string) {
-    let i: number = 0;
-    let auxiliaryCopy: string[] = this.boardMatrix[j];
-    while (auxiliaryCopy[j] === `0`) {
-      if (auxiliaryCopy[j] === `0`) {
-        auxiliaryCopy[j] = value;
-      } else {
-        i++;
+  // To set the value of the introduced position
+  setValue(i: number, j: number, value: string) {
+    let k: number = 0;
+    let l: number = 0;
+    let flag: boolean = false;
+    for (k = 0; k < 6; k++) {
+      for (l = 0; l < 7; l++) {
+        if ((k === 0) && (l === 0)) {
+          if (this.boardMatrix[k][l] === `0`) {
+            flag = true;
+          } else {
+            flag = false;
+          }
+        }
       }
     }
-    this.boardMatrix[i] = auxiliaryCopy;
-  }
-  printsMatrix() {
-    let i: number = 0;
-    while (i < 6) {
-      console.log(`${this.boardMatrix[i]}`);
-      i++;
+    if (flag === true) {
+      this.boardMatrix[i][j] = value;
+    } else {
+      i--;
+      this.setValue(i, j, value);
     }
+    // let i: number = 0;
+    // let auxiliaryCopy: string[] = this.boardMatrix[j];
+    // while (auxiliaryCopy[j] === `0`) {
+    //   if (auxiliaryCopy[j] === `0`) {
+    //     auxiliaryCopy[j] = value;
+    //   } else {
+    //     i++;
+    //   }
+    // }
+    // this.boardMatrix[i] = auxiliaryCopy;
   }
+  // To print the matrix result
+  printsMatrix() {
+    // let i: number;
+    // let j: number;
+    // for (i = 0; i < 6; i++) {
+    //   for (j = 0; j < 7; j++) {
+    //     console.log(this.boardMatrix[i][j] + `\t`);
+    //   }
+    //   console.log(`\n`);
+    // }
+    console.log(this.boardMatrix[1]);
+  }
+  // To comprobe if a player wins the game
   comprobation(value: string): boolean {
     let i: number = 0;
     const j: number = 0;
     let counter: number = 0;
-    while (i < 6) {
+    for (i = 0; i < 6; i++) {
       if (this.boardMatrix[i][j] === value) {
         let auxI: number = i;
         let auxJ: number = j;
@@ -95,20 +122,21 @@ interface player {
 
 class connectsFour extends board implements player {
   // eslint-disable-next-line max-len
-  constructor(public boardMatrix: string[][], public name: string, public chips: number) {
+  constructor(boardMatrix: string[][], public name: string, public chips: number) {
     super(boardMatrix); // Because this is an heritage class
-    let playerOne: player = {
+    const playerOne: player = {
       name: `player 1`,
       chips: 21,
     };
-    let playerTwo: player = {
+    const playerTwo: player = {
       name: `player 2`,
       chips: 21,
     };
     this.start(playerOne, playerTwo);
   }
+  // The start of the game
   start(playerOne: player, playerTwo: player): string {
-    let i: number = 0;
+    let i: number = 5;
     let j: number = 0;
     while ((playerOne.chips >= 0) && (playerTwo.chips >= 0)) {
       // player 1 game
@@ -120,7 +148,7 @@ class connectsFour extends board implements player {
       console.log(`La columna seleccionada ha sido: ${optionColumns}`);
       j = optionColumns;
 
-      this.setValue(j, `X`);
+      this.setValue(i, j, `X`);
       console.log();
       // eslint-disable-next-line max-len
       console.log(`EL jugador uno, tras introducir la ficha en la columna ${j}.`);
@@ -140,7 +168,7 @@ class connectsFour extends board implements player {
       console.log(`La columna seleccionada ha sido: ${optionColumns}`);
       j = optionColumns;
     
-      this.setValue(j, `Y`);
+      this.setValue(i, j, `Y`);
       console.log();
       console.log(`EL jugador dos, tras introducir la ficha en la fila ${j}.`);
       console.log(`El tablero tiene el siguiente aspecto: `);
