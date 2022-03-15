@@ -15,8 +15,8 @@ class board {
     // console.log(this.boardMatrix); // To Comprobe
   }
   // To get the value of the introduced position
-  getValue(i: number, j: number) {
-    return this.boardMatrix[i][j];
+  getValue(i: number) {
+    return this.boardMatrix[i];
   }
   // To set the value of the introduced position
   setValue(i: number, j: number, value: string) {
@@ -69,52 +69,70 @@ class board {
   }
   // To comprobe if a player wins the game
   comprobation(value: string): boolean {
-    // let i: number = 0;
-    // const j: number = 0;
-    // let counter: number = 0;
-    // for (i = 0; i < 6; i++) {
-    //   if (this.boardMatrix[i][j] === value) {
-    //     let auxI: number = i;
-    //     let auxJ: number = j;
-    //     counter++;
-    //     while (auxI < 6) {
-    //       auxI++;
-    //       if (this.boardMatrix[auxI][auxJ] === value) {
-    //         counter++;
-    //       }
-    //     }
-    //     if (counter !== 4) {
-    //       counter = 1;
-    //       auxI = i;
-    //       while (auxJ < 7) {
-    //         auxJ++;
-    //         if (this.boardMatrix[auxI][auxJ] === value) {
-    //           counter++;
-    //         }
-    //       }
-    //     }
-    //     if (counter !== 4) {
-    //       counter = 1;
-    //       auxI = i;
-    //       auxJ = j;
-    //       while (auxJ < 7) {
-    //         auxI++;
-    //         auxJ++;
-    //         if (this.boardMatrix[auxI][auxJ] === value) {
-    //           counter++;
-    //         }
-    //       }
-    //     }
-    //     if (counter === 4) {
-    //       return true;
-    //     }
-    //   }
-    //   i++;
-    // }
-    // if (counter !== 4) {
-    //   return false;
-    // }
-  return false;
+    let counter: number = 0;
+    let i: number = 0;
+    let j: number = 0;
+    let auxiliaryString: string = ``;
+    // To comprobe the rows
+    for (i = 0; i < 6; i++) {
+      auxiliaryString = this.boardMatrix[i];
+      for (j = 0; j < 7; j++) {
+        if (auxiliaryString[j] === value) {
+          counter++;
+        } else {
+          counter = 0;
+        }
+      }
+      if (counter === 4) {
+        return true;
+      } else {
+        counter = 0;
+      }
+    }
+    // To comprobe the columns
+    counter = 0;
+    let k: number = 0;
+    while (k < 7) {
+      for (i = 0; i < 6; i++) {
+        auxiliaryString = this.boardMatrix[i];
+        if (auxiliaryString[k] === value) {
+          counter++;
+        } else {
+          counter = 0;
+        }
+      }
+      if (counter === 4) {
+        return true;
+      } else {
+        counter = 0;
+      }
+      k++;
+    }
+    // To comprobe the diagonal
+    counter = 0;
+    k = 0;
+    let l: number = 0;
+    while (l < 6) {
+      for (i = l; i < 6; i++) {
+        auxiliaryString = this.boardMatrix[i];
+        k = i;
+        while (k < 6) {
+          if (auxiliaryString[k] === value) {
+            counter++;
+            console.log(counter);
+          }
+          k++;
+          auxiliaryString = this.boardMatrix[k];
+        }
+        if (counter === 4) {
+          return true;
+        } else {
+          counter = 0;
+        }
+      }
+      l++;
+    }
+    return false;
   }
 }
 
@@ -160,7 +178,8 @@ class connectsFour extends board implements player {
       playerOne.chips = playerOne.chips - 1;
 
       if (this.comprobation(`X`) === true) {
-        console.log(`El juego a finalizado.`);
+        console.log();
+        console.log(`<< EL JUEGO A FINALIZADO >>`);
         console.log(`El ganador es el jugador número 1`);
         return 'WIN PLAYER ONE';
       }
@@ -179,7 +198,8 @@ class connectsFour extends board implements player {
       playerTwo.chips = playerTwo.chips - 1;
 
       if (this.comprobation(`Y`) === true) {
-        console.log(`El juego a finalizado.`);
+        console.log();
+        console.log(`<< EL JUEGO A FINALIZADO >>`);
         console.log(`El ganador es el jugador número 2`);
         return `WIN PLAYER TWO`;
       }
