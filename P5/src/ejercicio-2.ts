@@ -97,9 +97,9 @@ class board {
         auxiliaryString = this.boardMatrix[i];
         if (auxiliaryString[k] === value) {
           counter++;
-        } else {
-          counter = 0;
-        }
+        } // else {
+        //   counter = 0;
+        // }
       }
       if (counter === 4) {
         return true;
@@ -115,7 +115,6 @@ class board {
     while (l < 6) {
       for (i = l; i < 6; i++) {
         auxiliaryString = this.boardMatrix[i];
-        k = i;
         while (k < 6) {
           if (auxiliaryString[k] === value) {
             counter++;
