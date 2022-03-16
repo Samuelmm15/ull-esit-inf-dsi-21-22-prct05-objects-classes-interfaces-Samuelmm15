@@ -97,15 +97,15 @@ class board {
         auxiliaryString = this.boardMatrix[i];
         if (auxiliaryString[k] === value) {
           counter++;
-        } // else {
-        //   counter = 0;
-        // }
+        } else {
+          counter = 0;
+        }
       }
       if (counter === 4) {
         return true;
-      } else {
-        counter = 0;
-      }
+      } // else {
+      //   counter = 0;
+      // }
       k++;
     }
     // To comprobe the diagonal
