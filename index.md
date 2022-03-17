@@ -195,7 +195,16 @@ Hay que tener en cuenta que, el método anterior recibe como parámetros, los do
 encuentran almacenados dentro de la Pokedex.
 
 La ejecución del código y el testeo de este, se puede observar a continuación:
-[imagen]
+
+![exercise-1-execution](https://user-images.githubusercontent.com/72341631/158905632-a71f9e44-bae1-4430-9ace-6719dcc76cea.png)
+
+El testeo del ejercicio es:
+
+![execise-1-test](https://user-images.githubusercontent.com/72341631/158905669-d5863d62-935e-4697-add2-43bfb4dcac97.png)
+
+El cubrimiento del código del programa:
+
+![exercise-1-test-1](https://user-images.githubusercontent.com/72341631/158905692-c2218d94-8f3f-484a-82c1-f5725d25fb2c.png)
 
 ### /// Ejercicio 3 - Conecta 4  <a name="id4"></a>
 
@@ -479,7 +488,23 @@ start(playerOne: player, playerTwo: player): string {
 ```
 
 La ejecución del programa y el testeo de este, se puede observar en las imagenes adjuntas a continuación:
-[imagen]
+
+**Ganador mediante fila:**
+
+![exercise-2-row](https://user-images.githubusercontent.com/72341631/158905793-b7d5f9bb-9792-486e-9909-b7d22ae03e0a.png)
+
+**Ganador mediante columna:**
+
+![exercise-2-column](https://user-images.githubusercontent.com/72341631/158905834-60953a6c-4799-4be1-83c1-7ead27e2d1b1.png)
+
+**Ganador mediante diagonal:**
+
+![exercise-2-diagonal](https://user-images.githubusercontent.com/72341631/158905886-9ece6901-2099-44f2-9351-b80232dc064b.png)
+
+Cubrimiento del código del programa:
+
+![exercise-2-test](https://user-images.githubusercontent.com/72341631/158905915-b0d2ebce-3a93-4858-b4af-3fea06a0a4d6.png)
+
 
 En conclusión, la realización de esta quinta práctica de la asignatura, me ha ayudado a aprender un poco más sobre la 
 programación orientada a objetos. No sólo he podido aprender, consejos, técnicas o guías de uso para realizar una 
