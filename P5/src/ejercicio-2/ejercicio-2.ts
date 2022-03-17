@@ -68,7 +68,7 @@ class board {
     }
   }
   // To comprobe if a player wins the game
-  comprobation(value: string): boolean {
+  comprobationRows(value: string): boolean {
     let counter: number = 0;
     let i: number = 0;
     let j: number = 0;
@@ -76,6 +76,7 @@ class board {
     // To comprobe the rows
     for (i = 0; i < 6; i++) {
       auxiliaryString = this.boardMatrix[i];
+      console.log(auxiliaryString);
       for (j = 0; j < 7; j++) {
         if (auxiliaryString[j] === value) {
           counter++;
@@ -89,28 +90,38 @@ class board {
         counter = 0;
       }
     }
+    return false;
+  }
+  comprobationColumns(value: string) {
     // To comprobe the columns
-    counter = 0;
+    let counter: number = 0;
+    let i: number = 0;
+    let auxiliaryString: string = ``;
     let k: number = 0;
     while (k < 7) {
       for (i = 0; i < 6; i++) {
         auxiliaryString = this.boardMatrix[i];
         if (auxiliaryString[k] === value) {
           counter++;
-        } else {
-          counter = 0;
-        }
+        } // else {
+        //   counter = 0;
+        // }
       }
       if (counter === 4) {
         return true;
-      } // else {
-      //   counter = 0;
-      // }
+      } else {
+        counter = 0;
+      }
       k++;
     }
+    return false;
+  }
+  comprobationDiagonal(value:string) {
     // To comprobe the diagonal
-    counter = 0;
-    k = 0;
+    let counter: number = 0;
+    let i: number = 0;
+    let auxiliaryString: string = ``;
+    let k: number = 0;
     let l: number = 0;
     while (l < 6) {
       for (i = l; i < 6; i++) {
@@ -118,7 +129,7 @@ class board {
         while (k < 6) {
           if (auxiliaryString[k] === value) {
             counter++;
-            console.log(counter);
+            // console.log(counter);
           }
           k++;
           auxiliaryString = this.boardMatrix[k];
@@ -134,6 +145,7 @@ class board {
     return false;
   }
 }
+
 
 interface player {
   name: string;
@@ -176,7 +188,9 @@ class connectsFour extends board implements player {
       this.printsMatrix();
       playerOne.chips = playerOne.chips - 1;
 
-      if (this.comprobation(`X`) === true) {
+      // eslint-disable-next-line max-len
+      if ((this.comprobationRows(`X`) === true) || (this.comprobationColumns(`X`) === true) ||
+      (this.comprobationDiagonal(`X`) === true)) {
         console.log();
         console.log(`<< EL JUEGO A FINALIZADO >>`);
         console.log(`El ganador es el jugador número 1`);
@@ -196,7 +210,9 @@ class connectsFour extends board implements player {
       this.printsMatrix();
       playerTwo.chips = playerTwo.chips - 1;
 
-      if (this.comprobation(`Y`) === true) {
+      // eslint-disable-next-line max-len
+      if ((this.comprobationRows(`Y`) === true) || (this.comprobationColumns(`Y`) === true) ||
+        this.comprobationDiagonal(`Y`) === true) {
         console.log();
         console.log(`<< EL JUEGO A FINALIZADO >>`);
         console.log(`El ganador es el jugador número 2`);
