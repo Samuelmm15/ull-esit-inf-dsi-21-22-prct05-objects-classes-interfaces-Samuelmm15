@@ -198,11 +198,11 @@ La ejecución del código y el testeo de este, se puede observar a continuación
 
 ![exercise-1-execution](https://user-images.githubusercontent.com/72341631/158905632-a71f9e44-bae1-4430-9ace-6719dcc76cea.png)
 
-El testeo del ejercicio es:
+**El testeo del ejercicio es:**
 
 ![execise-1-test](https://user-images.githubusercontent.com/72341631/158905669-d5863d62-935e-4697-add2-43bfb4dcac97.png)
 
-El cubrimiento del código del programa:
+**El cubrimiento del código del programa:**
 
 ![exercise-1-test-1](https://user-images.githubusercontent.com/72341631/158905692-c2218d94-8f3f-484a-82c1-f5725d25fb2c.png)
 
@@ -501,7 +501,7 @@ La ejecución del programa y el testeo de este, se puede observar en las imagene
 
 ![exercise-2-diagonal](https://user-images.githubusercontent.com/72341631/158905886-9ece6901-2099-44f2-9351-b80232dc064b.png)
 
-Cubrimiento del código del programa:
+**Cubrimiento del código del programa:**
 
 ![exercise-2-test](https://user-images.githubusercontent.com/72341631/158905915-b0d2ebce-3a93-4858-b4af-3fea06a0a4d6.png)
 
