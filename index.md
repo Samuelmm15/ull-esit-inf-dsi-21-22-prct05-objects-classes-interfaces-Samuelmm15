@@ -204,7 +204,9 @@ programa, que permita que dos jugadores, puedan jugar al juego del **conecta 4**
 consiste en un panel o una tabla de 6x7, dónde, se puede introducir una ficha de juego por cada 
 turno de cada jugador.
 
-Para la implementación del programa, se crean dos clases. La primera de ellas `board`, contiene los diferentes métodos, que son usados para crear, acceder o modificar el contenido de la tabla de juego. Es decir, esta primera clase se encarga de la creación del panel de juego, junto con todas las operaciones que se pueden realizar con este.
+Para la implementación del programa, se crean dos clases. La primera de ellas `board`, contiene los diferentes métodos, que 
+son usados para crear, acceder o modificar el contenido de la tabla de juego. Es decir, esta primera clase se encarga de la 
+creación del panel de juego, junto con todas las operaciones que se pueden realizar con este.
 
 El constructor de la clase, se encarga de generar las dimensiones del propio panel. Este, tiene el siguiente aspecto:
 
@@ -225,9 +227,14 @@ constructor(private boardMatrix: string[]) {
   }
 ```
 
-A continuación, se desarrolla otro método que permite modificar los valores del panel, es decir, para este caso, este método se encarga de añadir las fichas de los jugadores dentro del tablero. Para ello, se hace uso de una variable auxiliar que por cada interacción saca el *string* que se encuentra dentro del vector, correspondiendo esta última con cada fila del tablero. Gracias a esto, se consigue introducir cada ficha en la columna correspondiente y en su respectiva fila.
+A continuación, se desarrolla otro método que permite modificar los valores del panel, es decir, para este caso, este 
+método se encarga de añadir las fichas de los jugadores dentro del tablero. Para ello, se hace uso de una variable auxiliar 
+que por cada interacción saca el *string* que se encuentra dentro del vector, correspondiendo esta última con cada fila del 
+tablero. Gracias a esto, se consigue introducir cada ficha en la columna correspondiente y en su respectiva fila.
 
-La comprobación de filas, se produce desde la última fila de la matriz, comprobando en todos los casos si dicha fila en la columna en la que se pretende introducir la ficha, se encuentra vacía. Si se encuentra vacía, se introduce la ficha, si se encuentra ocupada por otra ficha, se comprueba la fila superior para ver si en dicha fila se puede introducir la ficha.
+La comprobación de filas, se produce desde la última fila de la matriz, comprobando en todos los casos si dicha fila en la 
+columna en la que se pretende introducir la ficha, se encuentra vacía. Si se encuentra vacía, se introduce la ficha, si se 
+encuentra ocupada por otra ficha, se comprueba la fila superior para ver si en dicha fila se puede introducir la ficha.
 
 La implementación de esto descrito anteriormente se puede observar a continuación:
 
@@ -275,7 +282,8 @@ setValue(i: number, j: number, value: string) {
   }
 ```
 
-Por otro lado, se desarrolla el método necesario para imprimir de forma correcta la matriz. Para ello, se recorre cada posición del vector de cadenas, de manera que se vaya imprimiendo cada cadena (*string*) por pantalla.
+Por otro lado, se desarrolla el método necesario para imprimir de forma correcta la matriz. Para ello, se recorre cada 
+posición del vector de cadenas, de manera que se vaya imprimiendo cada cadena (*string*) por pantalla.
 
 ```
 printsMatrix() {
@@ -286,9 +294,12 @@ printsMatrix() {
   }
 ```
 
-A continuación, se desarrollan tres métodos necesarios para la comprobación del tablero. Haciendo uso de estos tres métodos, se realiza la comprobación de las filas, las columnas y las diagonales. Cada uno de estos métodos, realiza una búsqueda:
+A continuación, se desarrollan tres métodos necesarios para la comprobación del tablero. Haciendo uso de estos tres 
+métodos, se realiza la comprobación de las filas, las columnas y las diagonales. Cada uno de estos métodos, realiza una 
+búsqueda:
 
-El primero de ellos, por cada interacción obtiene la cadena de caracteres, dónde, comprueba por cada fila, si se produce que existe que 4 caracteres del mismo tipo se encuentran de manera continua.
+El primero de ellos, por cada interacción obtiene la cadena de caracteres, dónde, comprueba por cada fila, si se produce 
+que existe que 4 caracteres del mismo tipo se encuentran de manera continua.
 
 ```
 comprobationRows(value: string): boolean {
@@ -316,7 +327,9 @@ comprobationRows(value: string): boolean {
   }
 ```
 
-El segundo, por cada interacción obtiene cada una de las filas del panel, dónde, por cada fila comprueba la misma posición de cada fila, comprobando, si durante el recorrido de dicha columna, se produce que existen cuatro caracteres del mismo tipo de manera consecutiva.
+El segundo, por cada interacción obtiene cada una de las filas del panel, dónde, por cada fila comprueba la misma posición 
+de cada fila, comprobando, si durante el recorrido de dicha columna, se produce que existen cuatro caracteres del mismo 
+tipo de manera consecutiva.
 
 ```
  comprobationColumns(value: string) {
@@ -343,7 +356,10 @@ El segundo, por cada interacción obtiene cada una de las filas del panel, dónd
   }
 ```
 
-El tercer y último método de comprobación, se encarga de comprobar las diagonales que se forman en el panel, de manera que se produzca que 4 caracteres del mismo tipo se encuentren de manera consecutiva. Para ello, se comprueba en cada cadena del vector, si en la posición especificada por otra variable que va aumentando, se produce que 4 caracteres del mismo jugador se se encuentran de manera diagonal en el vector.
+El tercer y último método de comprobación, se encarga de comprobar las diagonales que se forman en el panel, de manera que 
+se produzca que 4 caracteres del mismo tipo se encuentren de manera consecutiva. Para ello, se comprueba en cada cadena del 
+vector, si en la posición especificada por otra variable que va aumentando, se produce que 4 caracteres del mismo jugador 
+se se encuentran de manera diagonal en el vector.
 
 ```
 comprobationDiagonal(value:string) {
@@ -375,7 +391,8 @@ comprobationDiagonal(value:string) {
   }
 ```
 
-Para continuar, se hace uso de una interfaz denominada como `player`. Esta, es necesaria para definir la estructura de los objetos que son de tipo **jugador**. Dicha interfaz se puede observar a continuación:
+Para continuar, se hace uso de una interfaz denominada como `player`. Esta, es necesaria para definir la estructura de los 
+objetos que son de tipo **jugador**. Dicha interfaz se puede observar a continuación:
 
 ```
 interface player {
@@ -384,9 +401,13 @@ interface player {
 }
 ```
 
-Por último, se desarrolla la clase `connectsFour`. Esta clase, heredando la clase `board` e implementado la interfaz `player`, desarrolla el funcionamiento base del juego *Conecta 4*. 
+Por último, se desarrolla la clase `connectsFour`. Esta clase, heredando la clase `board` e implementado la interfaz 
+`player`, desarrolla el funcionamiento base del juego *Conecta 4*. 
 
-Para ello, se implementa un método denominado como `start`, que recibe como parámetros dos objetos de tipo **player**, dónde, por cada jugador realiza una solicitud por teclado para que dicho jugador introduzca una ficha en la columna que desea. Una vez introducida la ficha en la columna, se muestra el estado del panel, y a continuación, pasa el turno al segundo jugador. Este proceso, ocurre de manera consecutiva hasta que, alguno de los dos jugadores gane la partida.
+Para ello, se implementa un método denominado como `start`, que recibe como parámetros dos objetos de tipo **player**, 
+dónde, por cada jugador realiza una solicitud por teclado para que dicho jugador introduzca una ficha en la columna que 
+desea. Una vez introducida la ficha en la columna, se muestra el estado del panel, y a continuación, pasa el turno al 
+segundo jugador. Este proceso, ocurre de manera consecutiva hasta que, alguno de los dos jugadores gane la partida.
 
 La implementación del método se puede observar:
 
@@ -460,4 +481,13 @@ start(playerOne: player, playerTwo: player): string {
 La ejecución del programa y el testeo de este, se puede observar en las imagenes adjuntas a continuación:
 [imagen]
 
-En conclusión, ....
+En conclusión, la realización de esta quinta práctica de la asignatura, me ha ayudado a aprender un poco más sobre la 
+programación orientada a objetos. No sólo he podido aprender, consejos, técnicas o guías de uso para realizar una 
+programación orientada a objetos de manera correcta para TypeScript, sino, que también esto me puede ser útil para el 
+desarrollo de proyectos en otros tipos de lenguajes.
+
+Por tanto, esta primera práctica realizada como toma de contacto para la programación orientada a objetos en TypeScript, ha 
+sido interesante para aprender un poco más sobre este tipo de programación, y, además, familiarizarme con un nuevo término 
+para mi personalmente, como es el uso de interfaces, para poder definir la estructura de los objetos que serán usados para 
+las clases.
+
