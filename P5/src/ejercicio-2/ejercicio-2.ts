@@ -99,7 +99,7 @@ class board {
     let i: number = 0;
     let auxiliaryString: string = ``;
     let k: number = 0;
-    while (k < 7) {
+    for (k = 0; k < 7; k++) {
       for (i = 0; i < 6; i++) {
         auxiliaryString = this.boardMatrix[i];
         if (auxiliaryString[k] === value) {
@@ -114,7 +114,6 @@ class board {
       } else {
         counter = 0;
       }
-      k++;
     }
     return false;
   }
@@ -124,33 +123,27 @@ class board {
     let i: number = 0;
     let j: number = 0;
     let auxiliaryString: string = ``;
-    let k: number = 0;
-    let l: number = 0;
+    let k: number = 5;
     for (i = 5; i >= 0; i--) {
       auxiliaryString = this.boardMatrix[i];
       for (j = 0; j < 7; j++) {
-        
+        if (auxiliaryString[j] === value) {
+          counter++;
+        // eslint-disable-next-line max-len
+        } else if ((auxiliaryString[j] !== `0`) && (auxiliaryString[j] !== value)) {
+          counter = 0;
+        }
+        k--;
+        if (k >= 0) {
+          auxiliaryString = this.boardMatrix[k];
+        }
+      }
+      if (counter === 4) {
+        return true;
+      } else {
+        counter = 0;
       }
     }
-    // while (l < 6) {
-    //   for (i = l; i < 6; i++) {
-    //     auxiliaryString = this.boardMatrix[i];
-    //     while (k < 6) {
-    //       if (auxiliaryString[k] === value) {
-    //         counter++;
-    //         // console.log(counter);
-    //       }
-    //       k++;
-    //       auxiliaryString = this.boardMatrix[k];
-    //     }
-    //     if (counter === 4) {
-    //       return true;
-    //     } else {
-    //       counter = 0;
-    //     }
-    //   }
-    //   l++;
-    // }
     return false;
   }
 }
@@ -177,7 +170,7 @@ class connectsFour extends board implements player {
   }
   // The start of the game
   start(playerOne: player, playerTwo: player): string {
-    let i: number = 5;
+    const i: number = 5;
     let j: number = 0;
     while ((playerOne.chips >= 0) && (playerTwo.chips >= 0)) {
       // player 1 game
@@ -220,7 +213,6 @@ class connectsFour extends board implements player {
       optionColumns = entry(`<<JUGADOR 2>>: Introduzca la columna donde quiere introducir la columns: `);
       console.log(`La columna seleccionada ha sido: ${optionColumns}`);
       j = optionColumns - 1;
-    
       this.setValue(i, j, `Y`);
       console.log();
       console.log(`EL jugador dos, tras introducir la ficha en la fila ${j}.`);
