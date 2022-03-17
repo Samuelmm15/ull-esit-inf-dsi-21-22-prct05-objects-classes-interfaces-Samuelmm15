@@ -199,4 +199,265 @@ La ejecución del código y el testeo de este, se puede observar a continuación
 
 ### /// Ejercicio 3 - Conecta 4  <a name="id4"></a>
 
-Durante el desarrollo de este segundo y último ejercicio, se solicita el desarrollo de un programa, que permita que dos jugadores, puedan jugar al juego del **conecta 4**. Este juego consiste en un panel o una tabla de 6x7, dónde se puede introducir una ficha de juego por cada turno de cada jugador.
+Durante el desarrollo de este segundo y último ejercicio, se solicita el desarrollo de un 
+programa, que permita que dos jugadores, puedan jugar al juego del **conecta 4**. Este juego, 
+consiste en un panel o una tabla de 6x7, dónde, se puede introducir una ficha de juego por cada 
+turno de cada jugador.
+
+Para la implementación del programa, se crean dos clases. La primera de ellas `board`, contiene los diferentes métodos, que son usados para crear, acceder o modificar el contenido de la tabla de juego. Es decir, esta primera clase se encarga de la creación del panel de juego, junto con todas las operaciones que se pueden realizar con este.
+
+El constructor de la clase, se encarga de generar las dimensiones del propio panel. Este, tiene el siguiente aspecto:
+
+```
+constructor(private boardMatrix: string[]) {
+    let auxiliaryArray: string = ``;
+    const rows: number = 6;
+    const columns: number = 7;
+    let i: number = 0;
+    let j: number = 0;
+    for (i = 0; i < rows; i++) {
+      for (j = 0; j < columns; j++) {
+        auxiliaryArray = auxiliaryArray + `0`;
+      }
+      this.boardMatrix.push(auxiliaryArray);
+      auxiliaryArray = ``;
+    }
+  }
+```
+
+A continuación, se desarrolla otro método que permite modificar los valores del panel, es decir, para este caso, este método se encarga de añadir las fichas de los jugadores dentro del tablero. Para ello, se hace uso de una variable auxiliar que por cada interacción saca el *string* que se encuentra dentro del vector, correspondiendo esta última con cada fila del tablero. Gracias a esto, se consigue introducir cada ficha en la columna correspondiente y en su respectiva fila.
+
+La comprobación de filas, se produce desde la última fila de la matriz, comprobando en todos los casos si dicha fila en la columna en la que se pretende introducir la ficha, se encuentra vacía. Si se encuentra vacía, se introduce la ficha, si se encuentra ocupada por otra ficha, se comprueba la fila superior para ver si en dicha fila se puede introducir la ficha.
+
+La implementación de esto descrito anteriormente se puede observar a continuación:
+
+```
+setValue(i: number, j: number, value: string) {
+    let k: number = 0;
+    let l: number = 0;
+    let flag: boolean = false;
+    let repeat: boolean = false;
+    let auxiliaryResult: string = ``;
+    let auxiliary: string = ``;
+    let counter: number = 0;
+    for (k = 0; k < 6; k++) {
+      auxiliary = this.boardMatrix[k];
+      for (l = 0; l < 7; l++) {
+        if ((k === i) && (l === j)) {
+          if (auxiliary[l] === `0`) {
+            flag = true;
+            auxiliaryResult = auxiliaryResult + value;
+            counter++;
+          } else {
+            flag = false;
+            i--;
+            repeat = true;
+          }
+        } else {
+          if (counter < 7) {
+            auxiliaryResult = auxiliaryResult + auxiliary[l];
+            counter++;
+          }
+        }
+      }
+      if (flag === false) {
+        auxiliaryResult = ``;
+        counter = 0;
+      }
+    }
+
+    if (flag !== false) {
+      this.boardMatrix[i] = auxiliaryResult;
+    }
+    if (repeat === true) {
+      this.setValue(i, j, value);
+    }
+  }
+```
+
+Por otro lado, se desarrolla el método necesario para imprimir de forma correcta la matriz. Para ello, se recorre cada posición del vector de cadenas, de manera que se vaya imprimiendo cada cadena (*string*) por pantalla.
+
+```
+printsMatrix() {
+    let i: number = 0;
+    for (i = 0; i < 6; i++) {
+      console.log(this.boardMatrix[i]);
+    }
+  }
+```
+
+A continuación, se desarrollan tres métodos necesarios para la comprobación del tablero. Haciendo uso de estos tres métodos, se realiza la comprobación de las filas, las columnas y las diagonales. Cada uno de estos métodos, realiza una búsqueda:
+
+El primero de ellos, por cada interacción obtiene la cadena de caracteres, dónde, comprueba por cada fila, si se produce que existe que 4 caracteres del mismo tipo se encuentran de manera continua.
+
+```
+comprobationRows(value: string): boolean {
+    let counter: number = 0;
+    let i: number = 0;
+    let j: number = 0;
+    let auxiliaryString: string = ``;
+    for (i = 0; i < 6; i++) {
+      auxiliaryString = this.boardMatrix[i];
+      console.log(auxiliaryString);
+      for (j = 0; j < 7; j++) {
+        if (auxiliaryString[j] === value) {
+          counter++;
+        } else if ((auxiliaryString[j] !== `0`) && (auxiliaryString[j] !== value)) {
+          counter = 0;
+        }
+      }
+      if (counter === 4) {
+        return true;
+      } else {
+        counter = 0;
+      }
+    }
+    return false;
+  }
+```
+
+El segundo, por cada interacción obtiene cada una de las filas del panel, dónde, por cada fila comprueba la misma posición de cada fila, comprobando, si durante el recorrido de dicha columna, se produce que existen cuatro caracteres del mismo tipo de manera consecutiva.
+
+```
+ comprobationColumns(value: string) {
+    let counter: number = 0;
+    let i: number = 0;
+    let auxiliaryString: string = ``;
+    let k: number = 0;
+    for (k = 0; k < 7; k++) {
+      for (i = 0; i < 6; i++) {
+        auxiliaryString = this.boardMatrix[i];
+        if (auxiliaryString[k] === value) {
+          counter++;
+        } else if ((auxiliaryString[k] !== `0`) && (auxiliaryString[k] !== value)) {
+          counter = 0;
+        }
+      }
+      if (counter === 4) {
+        return true;
+      } else {
+        counter = 0;
+      }
+    }
+    return false;
+  }
+```
+
+El tercer y último método de comprobación, se encarga de comprobar las diagonales que se forman en el panel, de manera que se produzca que 4 caracteres del mismo tipo se encuentren de manera consecutiva. Para ello, se comprueba en cada cadena del vector, si en la posición especificada por otra variable que va aumentando, se produce que 4 caracteres del mismo jugador se se encuentran de manera diagonal en el vector.
+
+```
+comprobationDiagonal(value:string) {
+    let counter: number = 0;
+    let i: number = 0;
+    let j: number = 0;
+    let auxiliaryString: string = ``;
+    let k: number = 5;
+    for (i = 5; i >= 0; i--) {
+      auxiliaryString = this.boardMatrix[i];
+      for (j = 0; j < 7; j++) {
+        if (auxiliaryString[j] === value) {
+          counter++;
+        } else if ((auxiliaryString[j] !== `0`) && (auxiliaryString[j] !== value)) {
+          counter = 0;
+        }
+        k--;
+        if (k >= 0) {
+          auxiliaryString = this.boardMatrix[k];
+        }
+      }
+      if (counter === 4) {
+        return true;
+      } else {
+        counter = 0;
+      }
+    }
+    return false;
+  }
+```
+
+Para continuar, se hace uso de una interfaz denominada como `player`. Esta, es necesaria para definir la estructura de los objetos que son de tipo **jugador**. Dicha interfaz se puede observar a continuación:
+
+```
+interface player {
+  name: string;
+  chips: number;
+}
+```
+
+Por último, se desarrolla la clase `connectsFour`. Esta clase, heredando la clase `board` e implementado la interfaz `player`, desarrolla el funcionamiento base del juego *Conecta 4*. 
+
+Para ello, se implementa un método denominado como `start`, que recibe como parámetros dos objetos de tipo **player**, dónde, por cada jugador realiza una solicitud por teclado para que dicho jugador introduzca una ficha en la columna que desea. Una vez introducida la ficha en la columna, se muestra el estado del panel, y a continuación, pasa el turno al segundo jugador. Este proceso, ocurre de manera consecutiva hasta que, alguno de los dos jugadores gane la partida.
+
+La implementación del método se puede observar:
+
+```
+start(playerOne: player, playerTwo: player): string {
+    const i: number = 5;
+    let j: number = 0;
+    while ((playerOne.chips >= 0) && (playerTwo.chips >= 0)) {
+      // PLAYER 1 GAME
+      const entry = require('prompt-sync')({sigit: true});
+      let optionColumns: number = 0;
+
+      optionColumns = entry(`<<JUGADOR 1>>: Introduzca la columna donde quiere introducir la ficha: `);
+      console.log(`La columna seleccionada ha sido: ${optionColumns}`);
+      j = optionColumns - 1;
+
+      this.setValue(i, j, `X`);
+      console.log();
+      console.log(`EL jugador uno, tras introducir la ficha en la columna ${j}.`);
+      console.log(`El tablero tiene el siguiente aspecto: `);
+      console.log();
+      this.printsMatrix();
+      playerOne.chips = playerOne.chips - 1;
+
+      if ((this.comprobationRows(`X`) === true) || (this.comprobationColumns(`X`) === true) ||
+      (this.comprobationDiagonal(`X`) === true)) {
+        console.log();
+        console.log(`<< EL JUEGO A FINALIZADO >>`);
+        console.log(`El ganador es el jugador número 1`);
+        return 'WIN PLAYER ONE';
+      }
+
+      let continueExecuting: number = 0;
+      console.log();
+      continueExecuting = entry(`Dejar de visualizar el tablero (Pulse cualquier tecla): `);
+      if (continueExecuting !== 1) {
+        console.clear();
+      }
+
+      // PLAYER 2 GAME
+      optionColumns = entry(`<<JUGADOR 2>>: Introduzca la columna donde quiere introducir la columns: `);
+      console.log(`La columna seleccionada ha sido: ${optionColumns}`);
+      j = optionColumns - 1;
+      this.setValue(i, j, `Y`);
+      console.log();
+      console.log(`EL jugador dos, tras introducir la ficha en la fila ${j}.`);
+      console.log(`El tablero tiene el siguiente aspecto: `);
+      console.log();
+      this.printsMatrix();
+      playerTwo.chips = playerTwo.chips - 1;
+
+      if ((this.comprobationRows(`Y`) === true) || (this.comprobationColumns(`Y`) === true) ||
+        this.comprobationDiagonal(`Y`) === true) {
+        console.log();
+        console.log(`<< EL JUEGO A FINALIZADO >>`);
+        console.log(`El ganador es el jugador número 2`);
+        return `WIN PLAYER TWO`;
+      }
+
+      continueExecuting = 0;
+      console.log();
+      continueExecuting = entry(`Dejar de visualizar el tablero (Pulse cualquier tecla): `);
+      if (continueExecuting !== 1) {
+        console.clear();
+      }
+    }
+    return `EMPATE`;
+  }
+```
+
+La ejecución del programa y el testeo de este, se puede observar en las imagenes adjuntas a continuación:
+[imagen]
+
+En conclusión, ....
