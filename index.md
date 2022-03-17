@@ -198,3 +198,5 @@ La ejecución del código y el testeo de este, se puede observar a continuación
 [imagen]
 
 ### /// Ejercicio 3 - Conecta 4  <a name="id4"></a>
+
+Durante el desarrollo de este segundo y último ejercicio, se solicita el desarrollo de un programa, que permita que dos jugadores, puedan jugar al juego del **conecta 4**. Este juego consiste en un panel o una tabla de 6x7, dónde se puede introducir una ficha de juego por cada turno de cada jugador.
