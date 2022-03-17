@@ -1,4 +1,11 @@
+/**
+ * Class necessar to operate with the board of the game.
+ */
 class board {
+  /**
+   * This is the constructor of the class.
+   * @param boardMatrix Consists in the board of the game Connects-4.
+   */
   constructor(private boardMatrix: string[]) {
     let auxiliaryArray: string = ``;
     const rows: number = 6;
@@ -14,11 +21,20 @@ class board {
     }
     // console.log(this.boardMatrix); // To Comprobe
   }
-  // To get the value of the introduced position
+  /**
+   * Function necessary to get the value of the introduced position.
+   * @param i Consists in the position of the board.
+   * @returns The line of the board that the user needs.
+   */
   getValue(i: number) {
     return this.boardMatrix[i];
   }
-  // To set the value of the introduced position
+  /**
+   * Function to set a value in a specific position.
+   * @param i Consists in the first coordinate.
+   * @param j Consists in the second coordinate.
+   * @param value Consists in the value to introduce in the board.
+   */
   setValue(i: number, j: number, value: string) {
     let k: number = 0;
     let l: number = 0;
@@ -60,20 +76,25 @@ class board {
       this.setValue(i, j, value);
     }
   }
-  // To print the matrix result
+  /**
+   * Function neccesary to print the board of the game.
+   */
   printsMatrix() {
     // let i: number = 0;
     // for (i = 0; i < 6; i++) {
     //   console.log(this.boardMatrix[i]);
     // }
   }
-  // To comprobe if a player wins the game
+  /**
+   * Function necessary to comprobe if a player wins the game.
+   * @param value Consists in the value to comprobe.
+   * @returns True if a player wins the game.
+   */
   comprobationRows(value: string): boolean {
     let counter: number = 0;
     let i: number = 0;
     let j: number = 0;
     let auxiliaryString: string = ``;
-    // To comprobe the rows
     for (i = 0; i < 6; i++) {
       auxiliaryString = this.boardMatrix[i];
       console.log(auxiliaryString);
@@ -93,8 +114,12 @@ class board {
     }
     return false;
   }
+  /**
+   * Function necessary to comprobe if a player wins the game.
+   * @param value Consists in the value to comprobe.
+   * @returns True if a player wins the game.
+   */
   comprobationColumns(value: string) {
-    // To comprobe the columns
     let counter: number = 0;
     let i: number = 0;
     let auxiliaryString: string = ``;
@@ -117,8 +142,12 @@ class board {
     }
     return false;
   }
+  /**
+   * Function necessary to comprobe if a player wins the game
+   * @param value Consists in the value to comprobe.
+   * @returns True if a player wins the game.
+   */
   comprobationDiagonal(value:string) {
-    // To comprobe the diagonal
     let counter: number = 0;
     let i: number = 0;
     let j: number = 0;
@@ -148,13 +177,24 @@ class board {
   }
 }
 
-
+/**
+ * Interface neccesary to define th structure of a player.
+ */
 interface player {
   name: string;
   chips: number;
 }
 
+/**
+ * Class neccesary to makes the Connects-4 game.
+ */
 class connectsFour extends board implements player {
+  /**
+   * This is the constructor of the class.
+   * @param boardMatrix Consists in the board of the game.
+   * @param name Consists in the name of the player.
+   * @param chips Consists in the total number that has a player.
+   */
   // eslint-disable-next-line max-len
   constructor(boardMatrix: string[], public name: string, public chips: number) {
     super(boardMatrix); // Because this is an heritage class
@@ -168,12 +208,20 @@ class connectsFour extends board implements player {
     };
     this.start(playerOne, playerTwo);
   }
-  // The start of the game
+  /**
+   * This function makes the correct implementation of the game.
+   * @param playerOne Consists in the first player.
+   * @param playerTwo Consists in the second player.
+   * @returns The winner of the game, or if nobody wins the game
+   * it says **tie**.
+   * Here we have a link a [youtube video](https://www.youtube.com/watch?v=1TzCYVTC9tc),
+   * that explains the use of the library `prompt-sync`.
+   */
   start(playerOne: player, playerTwo: player): string {
     const i: number = 5;
     let j: number = 0;
     while ((playerOne.chips >= 0) && (playerTwo.chips >= 0)) {
-      // player 1 game
+      // PLAYER 1 GAME
       const entry = require('prompt-sync')({sigit: true});
       let optionColumns: number = 0;
 
@@ -208,7 +256,7 @@ class connectsFour extends board implements player {
         console.clear();
       }
 
-      // player 2 game
+      // PLAYER 2 GAME
       // eslint-disable-next-line max-len
       optionColumns = entry(`<<JUGADOR 2>>: Introduzca la columna donde quiere introducir la columns: `);
       console.log(`La columna seleccionada ha sido: ${optionColumns}`);
@@ -243,6 +291,4 @@ class connectsFour extends board implements player {
 }
 
 const boardExample: string[] = [];
-const example = new connectsFour(boardExample, ``, 0);
-
-// https://www.youtube.com/watch?v=1TzCYVTC9tc
+export const example = new connectsFour(boardExample, ``, 0);

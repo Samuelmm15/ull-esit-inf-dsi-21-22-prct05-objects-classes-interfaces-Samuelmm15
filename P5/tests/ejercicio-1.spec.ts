@@ -1,10 +1,10 @@
 import 'mocha';
 import {expect} from 'chai';
-import {blastoisePokemon} from '../src/ejercicio-1';
-import {charizarPokemon} from '../src/ejercicio-1';
-import {raichuPokemon} from '../src/ejercicio-1';
-import {servinePokemon} from '../src/ejercicio-1';
-import {battleField} from '../src/ejercicio-1';
+import {blastoisePokemon} from '../src/ejercicio-1/ejercicio-1';
+import {charizarPokemon} from '../src/ejercicio-1/ejercicio-1';
+import {raichuPokemon} from '../src/ejercicio-1/ejercicio-1';
+import {servinePokemon} from '../src/ejercicio-1/ejercicio-1';
+import {battleField} from '../src/ejercicio-1/ejercicio-1';
 
 describe(' First combat class tests', () => {
   // eslint-disable-next-line max-len
