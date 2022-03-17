@@ -62,10 +62,10 @@ class board {
   }
   // To print the matrix result
   printsMatrix() {
-    let i: number = 0;
-    for (i = 0; i < 6; i++) {
-      console.log(this.boardMatrix[i]);
-    }
+    // let i: number = 0;
+    // for (i = 0; i < 6; i++) {
+    //   console.log(this.boardMatrix[i]);
+    // }
   }
   // To comprobe if a player wins the game
   comprobationRows(value: string): boolean {
@@ -80,7 +80,8 @@ class board {
       for (j = 0; j < 7; j++) {
         if (auxiliaryString[j] === value) {
           counter++;
-        } else {
+        // eslint-disable-next-line max-len
+        } else if ((auxiliaryString[j] !== `0`) && (auxiliaryString[j] !== value)) {
           counter = 0;
         }
       }
@@ -103,9 +104,10 @@ class board {
         auxiliaryString = this.boardMatrix[i];
         if (auxiliaryString[k] === value) {
           counter++;
-        } // else {
-        //   counter = 0;
-        // }
+        // eslint-disable-next-line max-len
+        } else if ((auxiliaryString[k] !== `0`) && (auxiliaryString[k] !== value)) {
+          counter = 0;
+        }
       }
       if (counter === 4) {
         return true;
@@ -120,28 +122,35 @@ class board {
     // To comprobe the diagonal
     let counter: number = 0;
     let i: number = 0;
+    let j: number = 0;
     let auxiliaryString: string = ``;
     let k: number = 0;
     let l: number = 0;
-    while (l < 6) {
-      for (i = l; i < 6; i++) {
-        auxiliaryString = this.boardMatrix[i];
-        while (k < 6) {
-          if (auxiliaryString[k] === value) {
-            counter++;
-            // console.log(counter);
-          }
-          k++;
-          auxiliaryString = this.boardMatrix[k];
-        }
-        if (counter === 4) {
-          return true;
-        } else {
-          counter = 0;
-        }
+    for (i = 5; i >= 0; i--) {
+      auxiliaryString = this.boardMatrix[i];
+      for (j = 0; j < 7; j++) {
+        
       }
-      l++;
     }
+    // while (l < 6) {
+    //   for (i = l; i < 6; i++) {
+    //     auxiliaryString = this.boardMatrix[i];
+    //     while (k < 6) {
+    //       if (auxiliaryString[k] === value) {
+    //         counter++;
+    //         // console.log(counter);
+    //       }
+    //       k++;
+    //       auxiliaryString = this.boardMatrix[k];
+    //     }
+    //     if (counter === 4) {
+    //       return true;
+    //     } else {
+    //       counter = 0;
+    //     }
+    //   }
+    //   l++;
+    // }
     return false;
   }
 }
@@ -176,7 +185,7 @@ class connectsFour extends board implements player {
       let optionColumns: number = 0;
 
       // eslint-disable-next-line max-len
-      optionColumns = entry(`Introduzca la columna donde quiere introducir la ficha: `);
+      optionColumns = entry(`<<JUGADOR 1>>: Introduzca la columna donde quiere introducir la ficha: `);
       console.log(`La columna seleccionada ha sido: ${optionColumns}`);
       j = optionColumns - 1;
 
@@ -185,6 +194,7 @@ class connectsFour extends board implements player {
       // eslint-disable-next-line max-len
       console.log(`EL jugador uno, tras introducir la ficha en la columna ${j}.`);
       console.log(`El tablero tiene el siguiente aspecto: `);
+      console.log();
       this.printsMatrix();
       playerOne.chips = playerOne.chips - 1;
 
@@ -197,9 +207,17 @@ class connectsFour extends board implements player {
         return 'WIN PLAYER ONE';
       }
 
+      let continueExecuting: number = 0;
+      console.log();
+      // eslint-disable-next-line max-len
+      continueExecuting = entry(`Dejar de visualizar el tablero (Pulse cualquier tecla): `);
+      if (continueExecuting !== 1) {
+        console.clear();
+      }
+
       // player 2 game
       // eslint-disable-next-line max-len
-      optionColumns = entry(`Introduzca la columna donde quiere introducir la columns: `);
+      optionColumns = entry(`<<JUGADOR 2>>: Introduzca la columna donde quiere introducir la columns: `);
       console.log(`La columna seleccionada ha sido: ${optionColumns}`);
       j = optionColumns - 1;
     
@@ -207,6 +225,7 @@ class connectsFour extends board implements player {
       console.log();
       console.log(`EL jugador dos, tras introducir la ficha en la fila ${j}.`);
       console.log(`El tablero tiene el siguiente aspecto: `);
+      console.log();
       this.printsMatrix();
       playerTwo.chips = playerTwo.chips - 1;
 
@@ -217,6 +236,14 @@ class connectsFour extends board implements player {
         console.log(`<< EL JUEGO A FINALIZADO >>`);
         console.log(`El ganador es el jugador número 2`);
         return `WIN PLAYER TWO`;
+      }
+
+      continueExecuting = 0;
+      console.log();
+      // eslint-disable-next-line max-len
+      continueExecuting = entry(`Dejar de visualizar el tablero (Pulse cualquier tecla): `);
+      if (continueExecuting !== 1) {
+        console.clear();
       }
     }
     return `EMPATE`;
