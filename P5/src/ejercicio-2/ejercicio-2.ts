@@ -291,4 +291,5 @@ class connectsFour extends board implements player {
 }
 
 const boardExample: string[] = [];
+// eslint-disable-next-line new-cap
 export const example = new connectsFour(boardExample, ``, 0);
